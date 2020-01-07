@@ -21,8 +21,8 @@
 */
 package server;
 
-import constants.EquipType;
-import constants.ServerConstants;
+import config.YamlConfig;
+import constants.inventory.EquipType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +38,8 @@ public class MakerItemFactory {
     
     public static MakerItemCreateEntry getItemCreateEntry(int toCreate, int stimulantid, Map<Integer, Short> reagentids) {
         MakerItemCreateEntry makerEntry = ii.getMakerItemEntry(toCreate);
-        if(makerEntry == null) {
-            return null;
+        if(makerEntry.isInvalid()) {
+            return makerEntry;
         }
         
           // THEY DECIDED FOR SOME BIZARRE PATTERN ON THE FEE THING, ALMOST RANDOMIZED.
@@ -74,7 +74,7 @@ public class MakerItemFactory {
     }
             
     private static double getMakerStimulantFee(int itemid) {
-        if(ServerConstants.USE_MAKER_FEE_HEURISTICS) {
+        if(YamlConfig.config.server.USE_MAKER_FEE_HEURISTICS) {
             EquipType et = EquipType.getEquipTypeById(itemid);
             int eqpLevel = ii.getEquipLevelReq(itemid);
 
@@ -109,7 +109,7 @@ public class MakerItemFactory {
     }
     
     private static double getMakerReagentFee(int itemid, int reagentLevel) {
-        if(ServerConstants.USE_MAKER_FEE_HEURISTICS) {
+        if(YamlConfig.config.server.USE_MAKER_FEE_HEURISTICS) {
             EquipType et = EquipType.getEquipTypeById(itemid);
             int eqpLevel = ii.getEquipLevelReq(itemid);
 
@@ -205,6 +205,10 @@ public class MakerItemFactory {
         public void trimCost() {
             reqCost = (int) (cost / 1000);
             reqCost *= 1000;
+        }
+        
+        public boolean isInvalid() {    // thanks Rohenn, Wh1SK3Y for noticing some items not getting checked properly
+            return reqLevel < 0;
         }
     }
 }

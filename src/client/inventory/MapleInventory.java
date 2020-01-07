@@ -37,7 +37,7 @@ import net.server.audit.locks.factory.MonitoredReentrantLockFactory;
 import tools.Pair;
 import client.MapleCharacter;
 import client.MapleClient;
-import constants.ItemConstants;
+import constants.inventory.ItemConstants;
 import server.MapleItemInformationProvider;
 import client.inventory.manipulator.MapleInventoryManipulator;
 import tools.FilePrinter;
@@ -83,6 +83,19 @@ public class MapleInventory implements Iterable<Item> {
     public void setSlotLimit(int newLimit) {
         lock.lock();
         try {
+            if (newLimit < slotLimit) {
+                List<Short> toRemove = new LinkedList<>();
+                for (Item it : list()) {
+                    if (it.getPosition() > newLimit) {
+                        toRemove.add(it.getPosition());
+                    }
+                }
+                
+                for (Short slot : toRemove) {
+                    removeSlot(slot);
+                }
+            }
+            
             slotLimit = (byte) newLimit;
         } finally {
             lock.unlock();
@@ -435,6 +448,20 @@ public class MapleInventory implements Iterable<Item> {
         }
     }
     
+    private static boolean checkItemRestricted(List<Pair<Item, MapleInventoryType>> items) {
+        MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
+        
+        // thanks Shavit for noticing set creation that would be only effective in rare situations
+        for (Pair<Item, MapleInventoryType> p : items) {
+            int itemid = p.getLeft().getItemId();
+            if (ii.isPickupRestricted(itemid) && p.getLeft().getQuantity() > 1) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     public static boolean checkSpot(MapleCharacter chr, Item item) {    // thanks Vcoc for noticing pshops not checking item stacks when taking item back
         return checkSpot(chr, Collections.singletonList(item));
     }
@@ -463,6 +490,10 @@ public class MapleInventory implements Iterable<Item> {
     public static boolean checkSpots(MapleCharacter chr, List<Pair<Item, MapleInventoryType>> items, List<Integer> typesSlotsUsed, boolean useProofInv) {
         // assumption: no "UNDEFINED" or "EQUIPPED" items shall be tested here, all counts are >= 0.
         
+        if (!checkItemRestricted(items)) {
+            return false;
+        }
+        
         Map<Integer, List<Integer>> rcvItems = new LinkedHashMap<>();
         Map<Integer, Byte> rcvTypes = new LinkedHashMap<>();
         
@@ -477,7 +508,7 @@ public class MapleInventory implements Iterable<Item> {
                         rcvItems.put(itemId, itemQtyList);
                         rcvTypes.put(itemId, item.right.getType());
                 } else {
-                        if (!ItemConstants.isRechargeable(itemId)) {
+                        if (!ItemConstants.isEquipment(itemId) && !ItemConstants.isRechargeable(itemId)) {
                                 qty.set(0, qty.get(0) + item.left.getQuantity());
                         } else {
                                 qty.add((int) item.left.getQuantity());
@@ -535,6 +566,10 @@ public class MapleInventory implements Iterable<Item> {
     public static boolean checkSpotsAndOwnership(MapleCharacter chr, List<Pair<Item, MapleInventoryType>> items, List<Integer> typesSlotsUsed, boolean useProofInv) {
         //assumption: no "UNDEFINED" or "EQUIPPED" items shall be tested here, all counts are >= 0 and item list to be checked is a legal one.
         
+        if (!checkItemRestricted(items)) {
+            return false;
+        }
+        
         Map<Long, List<Integer>> rcvItems = new LinkedHashMap<>();
         Map<Long, Byte> rcvTypes = new LinkedHashMap<>();
         Map<Long, String> rcvOwners = new LinkedHashMap<>();
@@ -552,7 +587,7 @@ public class MapleInventory implements Iterable<Item> {
                         rcvOwners.put(itemHash, item.left.getOwner());
                 } else {
                          // thanks BHB88 for pointing out an issue with rechargeable items being stacked on inventory check
-                        if (!ItemConstants.isRechargeable(item.left.getItemId())) {
+                        if (!ItemConstants.isEquipment(item.left.getItemId()) && !ItemConstants.isRechargeable(item.left.getItemId())) {
                                 qty.set(0, qty.get(0) + item.left.getQuantity());
                         } else {
                                 qty.add((int) item.left.getQuantity());
@@ -634,5 +669,9 @@ public class MapleInventory implements Iterable<Item> {
     
     public void unlockInventory() {
         lock.unlock();
+    }
+    
+    public void dispose() {
+        owner = null;
     }
 }

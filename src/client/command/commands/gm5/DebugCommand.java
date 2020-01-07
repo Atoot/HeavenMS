@@ -1,6 +1,6 @@
 /*
     This file is part of the HeavenMS MapleStory Server, commands OdinMS-based
-    Copyleft (L) 2016 - 2018 RonanLana
+    Copyleft (L) 2016 - 2019 RonanLana
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -27,7 +27,7 @@ import client.command.Command;
 import client.MapleClient;
 import client.MapleCharacter;
 import net.server.Server;
-import server.MaplePortal;
+import server.maps.MaplePortal;
 import server.TimerManager;
 import server.life.MapleMonster;
 import server.life.SpawnPoint;

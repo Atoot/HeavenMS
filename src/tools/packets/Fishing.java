@@ -1,6 +1,6 @@
 /*
     This file is part of the HeavenMS MapleStory Server
-    Copyleft (L) 2016 - 2018 RonanLana
+    Copyleft (L) 2016 - 2019 RonanLana
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -20,9 +20,9 @@
 package tools.packets;
 
 import client.MapleCharacter;
-import constants.GameConstants;
-import constants.ItemConstants;
-import constants.ServerConstants;
+import config.YamlConfig;
+import constants.game.GameConstants;
+import constants.inventory.ItemConstants;
 import server.MapleItemInformationProvider;
 import tools.MaplePacketCreator;
 
@@ -56,7 +56,7 @@ public class Fishing {
     private static boolean hitFishingTime(MapleCharacter chr, int baitLevel, double yearLikelihood, double timeLikelihood) {
         double baitLikelihood = 0.0002 * chr.getWorldServer().getFishingRate() * baitLevel;   // can improve 10.0 at "max level 50000" on rate 1x
         
-        if (ServerConstants.USE_DEBUG) {
+        if (YamlConfig.config.server.USE_DEBUG) {
             chr.dropMessage(5, "----- FISHING RESULT -----");
             chr.dropMessage(5, "Likelihoods - Year: " + yearLikelihood + " Time: " + timeLikelihood + " Meso: " + baitLikelihood);
             chr.dropMessage(5, "Score rolls - Year: " + (0.23 * yearLikelihood) + " Time: " + (0.77 * timeLikelihood) + " Meso: " + baitLikelihood);

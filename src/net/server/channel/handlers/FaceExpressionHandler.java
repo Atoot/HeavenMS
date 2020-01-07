@@ -23,7 +23,7 @@ package net.server.channel.handlers;
 
 import client.MapleClient;
 import client.MapleCharacter;
-import constants.ItemConstants;
+import constants.inventory.ItemConstants;
 import net.AbstractMaplePacketHandler;
 import tools.data.input.SeekableLittleEndianAccessor;
 
@@ -34,7 +34,7 @@ public final class FaceExpressionHandler extends AbstractMaplePacketHandler {
         int emote = slea.readInt();
         
         if (emote > 7) {
-            int itemid = 5159992 + emote;   // thanks Rajan (Darter) for reporting unchecked emote itemid
+            int itemid = 5159992 + emote;   // thanks RajanGrewal (Darter) for reporting unchecked emote itemid
             if (!ItemConstants.isFaceExpression(itemid) || chr.getInventory(ItemConstants.getInventoryType(itemid)).findById(itemid) == null) {
                 return;
             }

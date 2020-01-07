@@ -13,7 +13,7 @@ var name_cursor, role_cursor;
 
 // new server names are to be appended at the start of the name stack, building up the chronology.
 // make sure the server names are lexicograffically equivalent to their correspondent function.
-var servers = ["HeavenMS", "MapleSolaxia", "MoopleDEV", "MetroMS", "BubblesDEV", "OdinMS", "Contributors"];
+var servers = ["HeavenMS", "MapleSolaxia", "MoopleDEV", "BubblesDEV", "MetroMS", "OdinMS", "Contributors"];
 var servers_history = [];
 
 function addPerson(name, role) {
@@ -65,19 +65,19 @@ function writeServerStaff_MoopleDEV() {
         setHistory(2010, 2012);
 }
 
-function writeServerStaff_MetroMS() {
-        addPerson("David!", "Developer");
-        addPerson("XxOsirisxX", "Contributor");
-        addPerson("Generic", "Contributor");
-        
-        setHistory(2009, 2010);
-}
-
 function writeServerStaff_BubblesDEV() {
         addPerson("David!", "Developer");
         addPerson("Moogra", "Developer");
         addPerson("XxOsirisxX", "Contributor");
         addPerson("MrMysterious", "Contributor");
+        
+        setHistory(2009, 2010);
+}
+
+function writeServerStaff_MetroMS() {
+        addPerson("David!", "Developer");
+        addPerson("XxOsirisxX", "Contributor");
+        addPerson("Generic", "Contributor");
         
         setHistory(2009, 2009);
 }
@@ -93,6 +93,9 @@ function writeServerStaff_OdinMS() {
 }
 
 function writeServerStaff_Contributors() {
+        addPerson("IxianMace", "Contributor");
+        addPerson("Conrad", "Contributor");
+        addPerson("inhyuk", "Contributor");
         addPerson("Jayd", "Contributor");
         addPerson("Dragohe4rt", "Contributor");
         addPerson("Jvlaple", "Contributor");
@@ -115,7 +118,7 @@ function writeAllServerStaffs() {
                 role_cursor = [];
 
                 var srvName = servers[i];
-                eval("writeServerStaff_" + srvName)();
+                this["writeServerStaff_" + srvName]();
         
                 name_tree.push(name_cursor);
                 role_tree.push(role_cursor);

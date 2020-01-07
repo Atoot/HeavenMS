@@ -33,7 +33,7 @@ import client.inventory.Equip;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
 import client.inventory.manipulator.MapleInventoryManipulator;
-import client.processor.DueyProcessor;
+import client.processor.npc.DueyProcessor;
 import net.AbstractMaplePacketHandler;
 import net.server.world.World;
 import net.server.channel.Channel;
@@ -48,7 +48,7 @@ import tools.packets.Wedding;
 /**
  * @author Jvlaple
  * @author Ronan - major overhaul on Ring handling mechanics
- * @author Drago/Dragohe4rt - on Wishlist
+ * @author Drago (Dragohe4rt) - on Wishlist
  */
 public final class RingActionHandler extends AbstractMaplePacketHandler {
     private static int getBoxId(int useItemId) {
@@ -466,7 +466,7 @@ public final class RingActionHandler extends AbstractMaplePacketHandler {
                 
             case 9: 
                 try {
-                    // By Drago/Dragohe4rt
+                    // By -- Dragoso (Drago)
                     // Groom and Bride's Wishlist
 
                     MapleCharacter player = c.getPlayer();

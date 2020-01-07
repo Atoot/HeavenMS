@@ -1,6 +1,6 @@
 /*
     This file is part of the HeavenMS MapleStory Server
-    Copyleft (L) 2016 - 2018 RonanLana
+    Copyleft (L) 2016 - 2019 RonanLana
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -56,14 +56,12 @@ public class MapleLootManager {
                     qItemAmount = qCompleteAmount;
                 }
                 
-                if (qItemAmount <= 0) {
-                    continue;
-                }
+                // thanks kvmba for noticing quest items with no required amount failing to be detected as such
                 
                 int qItemStatus = chrInv.hasItem(dropEntry.itemId, qItemAmount);
                 if (qItemStatus == 2) {
                     continue;
-                } /*else if (restricted && qItemStatus == 1) {
+                } /*else if (restricted && qItemStatus == 1) {  // one-of-a-kind loots should be available everytime, thanks onechord for noticing
                     continue;
                 }*/
             } /*else if (restricted && chrInv.hasItem(dropEntry.itemId, 1) > 0) {   // thanks Conrad, Legalize for noticing eligible loots not being available to drop for non-killer parties

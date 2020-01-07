@@ -1,4 +1,4 @@
-#EXECUTE THIS FIRST, THEN NEXT SQL: 'db_drops.sql'
+﻿#EXECUTE THIS FIRST, THEN NEXT SQL: 'db_drops.sql'
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `dataString` varchar(64) NOT NULL DEFAULT '',
   `lastLogoutTime` timestamp NOT NULL DEFAULT '2015-01-01 05:00:00',
   `lastExpGainTime` timestamp NOT NULL DEFAULT '2015-01-01 05:00:00',
-  `partySearch` tinyint(1) NOT NULL DEFAULT '0',
+  `partySearch` tinyint(1) NOT NULL DEFAULT '1',
   `jailexpire` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `accountid` (`accountid`),
@@ -6013,7 +6013,7 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (7130000, 1072210, 1, 1, 0, 800),
 (7130000, 1002275, 1, 1, 0, 1500),
 (7130000, 1072177, 1, 1, 0, 800),
-(7130000, 4161021, 1, 1, 0, 6000),
+(7130000, 4161021, 1, 1, 0, 7000),
 (7130000, 1072312, 1, 1, 0, 800),
 (7130000, 2044901, 1, 1, 0, 300),
 (7130000, 2040419, 1, 1, 0, 300),
@@ -7120,7 +7120,7 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (8140102, 1452019, 1, 1, 0, 500),
 (8140102, 1382035, 1, 1, 0, 700),
 (8140102, 1432004, 1, 1, 0, 500),
-(8140102, 4161015, 1, 1, 0, 6000),
+(8140102, 4161015, 1, 1, 0, 7000),
 (8140102, 1002643, 1, 1, 0, 1500),
 (8140102, 2331000, 1, 1, 0, 500),
 (8140102, 2040321, 1, 1, 0, 300),
@@ -7152,7 +7152,7 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (8140103, 1322045, 1, 1, 0, 700),
 (8140103, 1412021, 1, 1, 0, 700),
 (8140103, 1432011, 1, 1, 0, 500),
-(8140103, 4161016, 1, 1, 0, 6000),
+(8140103, 4161016, 1, 1, 0, 7000),
 (8140103, 1492010, 1, 1, 0, 500),
 (8140103, 2332000, 1, 1, 0, 500),
 (8140103, 2044314, 1, 1, 0, 300),
@@ -7713,7 +7713,7 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (8150100, 2041013, 1, 1, 0, 300),
 (8150100, 1002366, 1, 1, 0, 1500),
 (8150100, 1072214, 1, 1, 0, 800),
-(8150100, 4161018, 1, 1, 0, 6000),
+(8150100, 4161018, 1, 1, 0, 7000),
 (8150100, 1072315, 1, 1, 0, 800),
 (8150100, 1052131, 1, 1, 0, 700),
 (8150100, 2044902, 1, 1, 0, 300),
@@ -7745,7 +7745,7 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (8150101, 1072223, 1, 1, 0, 800),
 (8150101, 2290042, 1, 1, 0, 500),
 (8150101, 2290052, 1, 1, 0, 500),
-(8150101, 4161018, 1, 1, 0, 6000),
+(8150101, 4161018, 1, 1, 0, 7000),
 (8150101, 1072318, 1, 1, 0, 800),
 (8150101, 2290102, 1, 1, 0, 500),
 (8150101, 2040420, 1, 1, 0, 300),
@@ -10287,10 +10287,6 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (8190000, 0, 800, 1200, 0, 400000),
 (8190002, 0, 900, 1300, 0, 400000),
 (9400545, 0, 600, 900, 0, 400000),
-(9001000, 0, 200, 400, 0, 400000),
-(9001001, 0, 200, 400, 0, 400000),
-(9001002, 0, 200, 400, 0, 400000),
-(9001003, 0, 200, 400, 0, 400000),
 (9420500, 0, 36, 54, 0, 400000),
 (9420502, 0, 30, 42, 0, 400000),
 (9420506, 0, 56, 69, 0, 400000),
@@ -10439,7 +10435,7 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (3230104, 4031209, 1, 1, 3072, 500000),
 (3230306, 4031159, 1, 1, 2074, 500000),
 (9500400, 4031224, 1, 1, 3607, 1000000),
-(9500400, 4031223, 1, 1, 3607, 1000000),
+(9500400, 4031223, 1, 1, 3608, 1000000),    # thanks Lame for noticing Hongbu's gourd unavailable
 (9420003, 4031400, 1, 1, 8761, 1000000),
 (9420001, 4031401, 1, 1, 8761, 1000000),
 (9300097, 4031472, 1, 1, 6301, 100000),
@@ -10735,14 +10731,14 @@ INSERT IGNORE INTO `temp_data` (`dropperid`, `itemid`, `minimum_quantity`, `maxi
 (8500002, 4031869, 1, 1, 6360, 999999),
 (8141000, 4031873, 1, 1, 6380, 60000),
 (8141100, 4031874, 1, 1, 6390, 60000),
-(7130101, 4001112, 1, 1, 0, 1000),
-(8170000, 4001112, 1, 1, 0, 1500),
-(5130107, 4001107, 1, 1, 0, 1000),
-(8143000, 4001107, 1, 1, 0, 1500),
-(7160000, 4001110, 1, 1, 0, 1000),
-(8150100, 4161018, 1, 1, 0, 1000),
-(7130000, 4161021, 1, 1, 0, 1000),
-(8150000, 4001111, 1, 1, 0, 999999),
+(7130101, 4001112, 1, 1, 0, 7000),
+(8170000, 4001112, 1, 1, 0, 7500),
+(5130107, 4001107, 1, 1, 0, 7000),
+(8143000, 4001107, 1, 1, 0, 7500),
+(7160000, 4001110, 1, 1, 0, 7000),
+(8150100, 4161018, 1, 1, 0, 7000),
+(7130000, 4161021, 1, 1, 0, 7000),
+(8150000, 4001111, 1, 1, 0, 700000),
 (8140000, 4031477, 1, 1, 0, 10000),
 (8170000, 4031453, 1, 1, 6291, 50000),
 (8160000, 4031474, 1, 1, 6295, 50000),
@@ -12828,7 +12824,7 @@ CREATE TABLE IF NOT EXISTS `dueypackages` (
   `SenderName` varchar(13) NOT NULL,
   `Mesos` int(10) unsigned DEFAULT '0',
   `TimeStamp` timestamp NOT NULL DEFAULT '2015-01-01 05:00:00',
-  `Message` varchar(200) NOT NULL DEFAULT "",
+  `Message` varchar(200) NULL,
   `Checked` tinyint(1) unsigned DEFAULT '1',
   `Type` tinyint(1) unsigned DEFAULT '0',
   PRIMARY KEY (`PackageId`)
@@ -12853,15 +12849,24 @@ CREATE TABLE IF NOT EXISTS `famelog` (
 CREATE TABLE IF NOT EXISTS `family_character` (
   `cid` int(11) NOT NULL,
   `familyid` int(11) NOT NULL,
-  `rank` int(11) NOT NULL,
-  `reputation` int(11) NOT NULL,
-  `todaysrep` int(11) NOT NULL,
-  `totaljuniors` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `juniorsadded` int(11) NOT NULL,
-  `totalreputation` int(11) NOT NULL,
+  `seniorid` int(11) NOT NULL,
+  `reputation` int(11) NOT NULL DEFAULT '0',
+  `todaysrep` int(11) NOT NULL DEFAULT '0',
+  `totalreputation` int(11) NOT NULL DEFAULT '0',
+  `reptosenior` int(11) NOT NULL DEFAULT '0',
+  `precepts` varchar(200) DEFAULT NULL,
+  `lastresettime` BIGINT(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cid`),
   INDEX (cid, familyid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `family_entitlement` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `charid` int(11) NOT NULL,
+  `entitlementid` int(11) NOT NULL,
+  `timestamp` BIGINT(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  INDEX (charid)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `fredstorage` (
@@ -14835,7 +14840,7 @@ INSERT IGNORE INTO `makerrecipedata` (`itemid`, `req_item`, `count`) VALUES
   (1372009, 4011002, 4),
   (1372009, 4260004, 28),
   (1382035, 4011002, 4),
-  (1382035, 4260004, 28),
+  (1382035, 4260005, 28),
   (1372010, 4011003, 4),
   (1372010, 4260005, 30),
   (1372032, 4011003, 5),
@@ -16316,6 +16321,9 @@ CREATE TABLE IF NOT EXISTS `mts_items` (
   `position` int(11) DEFAULT '0',
   `upgradeslots` int(11) DEFAULT '0',
   `level` int(11) DEFAULT '0',
+  `itemlevel` int(11) NOT NULL DEFAULT '1',
+  `itemexp` int(11) unsigned NOT NULL DEFAULT '0',
+  `ringid` int(11) NOT NULL DEFAULT '-1',
   `str` int(11) DEFAULT '0',
   `dex` int(11) DEFAULT '0',
   `int` int(11) DEFAULT '0',
@@ -16339,6 +16347,8 @@ CREATE TABLE IF NOT EXISTS `mts_items` (
   `transfer` int(2) DEFAULT '0',
   `vicious` int(2) unsigned NOT NULL DEFAULT '0',
   `flag` int(2) unsigned NOT NULL DEFAULT '0',
+  `expiration` bigint(20) NOT NULL DEFAULT '-1',
+  `giftFrom` varchar(26) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -16449,7 +16459,7 @@ INSERT INTO `nxcoupons` (`id`, `couponid`, `rate`, `activeday`, `starthour`, `en
 (40,5360042,2,254,0,24);
 
 CREATE TABLE IF NOT EXISTS `pets` (
-  `petid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `petid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(13) DEFAULT NULL,
   `level` int(10) unsigned NOT NULL,
   `closeness` int(10) unsigned NOT NULL,
@@ -16459,11 +16469,13 @@ CREATE TABLE IF NOT EXISTS `pets` (
   PRIMARY KEY (`petid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+
 CREATE TABLE IF NOT EXISTS `petignores` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `petid` int(10) unsigned NOT NULL ,
+  `petid` int(11) unsigned NOT NULL ,
   `itemid` int(10) unsigned NOT NULL ,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_petignorepetid` FOREIGN KEY (`petid`) REFERENCES `pets` (`petid`) ON DELETE CASCADE    # thanks Optimist for noticing queries over petid taking too long, shavit for pointing out an improvement using foreign key
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `playerdiseases` (
@@ -16573,6 +16585,16 @@ CREATE TABLE IF NOT EXISTS `queststatus` (
   `info` tinyint(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`queststatusid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+# quickslot table, by Shavit
+CREATE TABLE `quickslotkeymapped` (
+  `accountid` INT NOT NULL,
+  `keymap` BIGINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`accountid`)
+);
+
+ALTER TABLE `quickslotkeymapped`
+  ADD CONSTRAINT `quickslotkeymapped_accountid_fk` FOREIGN KEY (`accountid`) REFERENCES `accounts` (`id`) ON DELETE CASCADE;
 
 CREATE TABLE IF NOT EXISTS `reactordrops` (
   `reactordropid` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -20181,7 +20203,7 @@ INSERT INTO `shopitems` (`shopitemid`, `shopid`, `itemid`, `price`, `pitch`, `po
 (2755, 9201059, 1312005, 42500, 0, 156),
 (2756, 9201059, 1302068, 352500, 0, 160),
 (2757, 9201059, 1302008, 42500, 0, 164),
-(2758, 9201060, 2010003, 100, 0, 104),
+(2758, 9201060, 2010003, 100, 0, 178),
 (2759, 9201060, 2061000, 1, 0, 108),
 (2760, 9201060, 2060000, 1, 0, 112),
 (2761, 9201060, 2030000, 400, 0, 116),
@@ -20845,6 +20867,25 @@ INSERT INTO `shopitems` (`shopitemid`, `shopid`, `itemid`, `price`, `pitch`, `po
 (6531, 1337, 2040711, 1, 0, 62),
 (6532, 1337, 2340000, 1, 0, 63),
 (20020, 1337, 1082149, 1, 0, 64),
+(20255, 1337, 2044503, 1, 0, 86),	# 20255~20273: thanks to ozanrijen
+(20256, 1337, 2044703, 1, 0, 87),
+(20257, 1337, 2044603, 1, 0, 88),
+(20258, 1337, 2043303, 1, 0, 89),
+(20259, 1337, 2043103, 1, 0, 90),
+(20260, 1337, 2043203, 1, 0, 91),
+(20261, 1337, 2043003, 1, 0, 92),
+(20262, 1337, 2044403, 1, 0, 93),
+(20263, 1337, 2044303, 1, 0, 94),
+(20264, 1337, 2043803, 1, 0, 95),
+(20265, 1337, 2044103, 1, 0, 96),
+(20266, 1337, 2044203, 1, 0, 97),
+(20267, 1337, 2044003, 1, 0, 98),
+(20268, 1337, 2043703, 1, 0, 99),
+(20269, 1337, 2040806, 1, 0, 100),
+(20270, 1337, 2040007, 1, 0, 101),
+(20271, 1337, 2040506, 1, 0, 102),
+(20272, 1337, 2040710, 1, 0, 103),
+(20273, 1337, 2040711, 1, 0, 104),
 (6533, 9000069, 2022503, 0, 5, 1),
 (6534, 9000069, 2000004, 0, 5, 2),
 (6535, 9000069, 2022514, 0, 10, 3),
@@ -21391,7 +21432,8 @@ CREATE TABLE IF NOT EXISTS `skills` (
   `skilllevel` int(11) NOT NULL DEFAULT '0',
   `masterlevel` int(11) NOT NULL DEFAULT '0',
   `expiration` bigint(20) NOT NULL DEFAULT '-1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `skillpair` (`skillid`, `characterid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `specialcashitems` (
@@ -21446,6 +21488,12 @@ ALTER TABLE `dueyitems`
 
 ALTER TABLE `famelog`
   ADD CONSTRAINT `famelog_ibfk_1` FOREIGN KEY (`characterid`) REFERENCES `characters` (`id`) ON DELETE CASCADE;
+  
+ALTER TABLE `family_character`
+  ADD CONSTRAINT `family_character_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `characters` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `skills`
+  ADD CONSTRAINT `skills_chrid_fk` FOREIGN KEY (`characterid`) REFERENCES `characters` (`id`) ON DELETE CASCADE;	# thanks Shavit
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

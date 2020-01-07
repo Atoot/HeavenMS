@@ -23,7 +23,7 @@ package net.server.channel.handlers;
 
 import client.MapleClient;
 import client.inventory.MapleInventoryType;
-import constants.ItemConstants;
+import constants.inventory.ItemConstants;
 import net.AbstractMaplePacketHandler;
 import tools.data.input.SeekableLittleEndianAccessor;
 
@@ -37,6 +37,12 @@ public final class UseChairHandler extends AbstractMaplePacketHandler {
             return;
         }
         
-        c.getPlayer().sitChair(itemId);
+        if (c.tryacquireClient()) {
+            try {
+                c.getPlayer().sitChair(itemId);
+            } finally {
+                c.releaseClient();
+            }
+        }
     }
 }

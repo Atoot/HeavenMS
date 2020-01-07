@@ -1,6 +1,6 @@
 /*
     This file is part of the HeavenMS MapleStory Server
-    Copyleft (L) 2016 - 2018 RonanLana
+    Copyleft (L) 2016 - 2019 RonanLana
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -244,7 +244,8 @@ function monsterKilled(mob, eim) {
                         eim.showClearEffect();
                         eim.clearPQ();
 
-                        eim.dispatchUpdateQuestMobCount(bossMobId, entryMap);
+                        eim.dispatchRaiseQuestMobCount(bossMobId, entryMap);
+                        eim.dispatchRaiseQuestMobCount(9101003, entryMap); // thanks Atoot for noticing quest not getting updated after boss kill
                         mob.getMap().broadcastBalrogVictory(eim.getLeader().getName());
                 } else {
                         if(count == 1) {

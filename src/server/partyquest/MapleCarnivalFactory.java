@@ -14,7 +14,7 @@ import provider.MapleDataTool;
 import server.life.MobSkill;
 
 /**
-    *@author Drago/Dragohe4rt
+    *@author Drago (Dragohe4rt)
 */
 public class MapleCarnivalFactory {
 
@@ -59,7 +59,7 @@ public class MapleCarnivalFactory {
         if (multi) {
             return skills.get(multiTargetedSkills.get((int) (Math.random() * multiTargetedSkills.size())));
         } else {
-            return skills.get(multiTargetedSkills.get((int) (Math.random() * multiTargetedSkills.size())));
+            return skills.get(singleTargetedSkills.get((int) (Math.random() * singleTargetedSkills.size())));
         }
     }
     

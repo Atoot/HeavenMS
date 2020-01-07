@@ -29,9 +29,9 @@ import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
 import client.inventory.manipulator.MapleInventoryManipulator;
 import client.inventory.manipulator.MapleKarmaManipulator;
-import client.processor.FredrickProcessor;
+import client.processor.npc.FredrickProcessor;
 import com.mysql.jdbc.Statement;
-import constants.ServerConstants;
+import config.YamlConfig;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -232,7 +232,7 @@ public class MapleHiredMerchant extends AbstractMapleMapObject {
                 chr.announce(MaplePacketCreator.updateHiredMerchant(this, chr));
             }
             
-            if (ServerConstants.USE_ENFORCE_MERCHANT_SAVE) {
+            if (YamlConfig.config.server.USE_ENFORCE_MERCHANT_SAVE) {
                 chr.saveCharToDB(false);
             }
         }
@@ -287,7 +287,7 @@ public class MapleHiredMerchant extends AbstractMapleMapObject {
                         pItem.setDoesExist(false);
                     }
                     
-                    if(ServerConstants.USE_ANNOUNCE_SHOPITEMSOLD) {   // idea thanks to Vcoc
+                    if(YamlConfig.config.server.USE_ANNOUNCE_SHOPITEMSOLD) {   // idea thanks to Vcoc
                         announceItemSold(newItem, price, getQuantityLeft(pItem.getItem().getItemId()));
                     }
                     
@@ -413,18 +413,6 @@ public class MapleHiredMerchant extends AbstractMapleMapObject {
         this.removeOwner(c.getPlayer());
 
         try {
-            MapleCharacter player = c.getWorldServer().getPlayerStorage().getCharacterById(ownerId);
-            if(player != null) {
-                    player.setHasMerchant(false);
-            } else {
-                    Connection con = DatabaseConnection.getConnection();
-                    try (PreparedStatement ps = con.prepareStatement("UPDATE characters SET HasMerchant = 0 WHERE id = ?", Statement.RETURN_GENERATED_KEYS)) {
-                            ps.setInt(1, ownerId);
-                            ps.executeUpdate();
-                    }
-                    con.close();
-            }
-
             List<MaplePlayerShopItem> copyItems = getItems();
             if (check(c.getPlayer(), copyItems) && !timeout) {
                 for (MaplePlayerShopItem mpsi : copyItems) {
@@ -448,7 +436,20 @@ public class MapleHiredMerchant extends AbstractMapleMapObject {
                 e.printStackTrace();
             }
             
-            if (ServerConstants.USE_ENFORCE_MERCHANT_SAVE) {
+            // thanks Rohenn for noticing a possible dupe scenario on closing shop
+            MapleCharacter player = c.getWorldServer().getPlayerStorage().getCharacterById(ownerId);
+            if(player != null) {
+                    player.setHasMerchant(false);
+            } else {
+                    Connection con = DatabaseConnection.getConnection();
+                    try (PreparedStatement ps = con.prepareStatement("UPDATE characters SET HasMerchant = 0 WHERE id = ?", Statement.RETURN_GENERATED_KEYS)) {
+                            ps.setInt(1, ownerId);
+                            ps.executeUpdate();
+                    }
+                    con.close();
+            }
+            
+            if (YamlConfig.config.server.USE_ENFORCE_MERCHANT_SAVE) {
                 c.getPlayer().saveCharToDB(false);
             }
 

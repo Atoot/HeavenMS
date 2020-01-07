@@ -1,6 +1,6 @@
 /*
     This file is part of the HeavenMS MapleStory Server
-    Copyleft (L) 2016 - 2018 RonanLana
+    Copyleft (L) 2016 - 2019 RonanLana
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,7 @@
 package net.server.coordinator.matchchecker.listener;
 
 import client.MapleCharacter;
-import constants.LanguageConstants;
+import constants.string.LanguageConstants;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -71,7 +71,9 @@ public class MatchCheckerCPQChallenge implements MatchCheckerListenerRecipe {
                 
                 List<MaplePartyCharacter> chrMembers = new LinkedList<>();
                 for (MaplePartyCharacter mpc : chr.getParty().getMembers()) {
-                    chrMembers.add(mpc);
+                    if (mpc.isOnline()) {
+                        chrMembers.add(mpc);
+                    }
                 }
                 
                 if (message.contentEquals("cpq1")) {
